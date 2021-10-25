@@ -1,0 +1,7 @@
+{
+    "/v1/ms/Usuario/*": {
+        "target": "http://localhost:8192",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

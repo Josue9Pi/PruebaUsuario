@@ -1,0 +1,405 @@
+<style>
+     :host {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+        color: #333;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .caja {
+        margin: 20px auto 40px auto;
+        border: 1px solid #d9d9d9;
+        height: 30px;
+        overflow: hidden;
+        width: 230px;
+        position: relative;
+    }
+    
+    select {
+        background: transparent;
+        border: none;
+        font-size: 14px;
+        height: 30px;
+        padding: 5px;
+        width: 250px;
+    }
+    
+    select:focus {
+        outline: none;
+    }
+    
+    .caja::after {
+        content: "\025be";
+        display: table-cell;
+        padding-top: 7px;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        background-color: #d9d9d9;
+        position: absolute;
+        top: 0;
+        right: 0px;
+        pointer-events: none;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 8px 0;
+    }
+    
+    p {
+        margin: 0;
+    }
+    
+    .spacer {
+        flex: 1;
+    }
+    
+    .toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        background-color: #1976d2;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .toolbar img {
+        margin: 0 16px;
+    }
+    
+    .toolbar #twitter-logo {
+        height: 40px;
+        margin: 0 8px;
+    }
+    
+    .toolbar #youtube-logo {
+        height: 40px;
+        margin: 0 16px;
+    }
+    
+    .toolbar #twitter-logo:hover,
+    .toolbar #youtube-logo:hover {
+        opacity: 0.8;
+    }
+    
+    .content {
+        display: flex;
+        margin: 82px auto 32px;
+        padding: 0 16px;
+        max-width: 960px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 16px;
+    }
+    
+    .card {
+        all: unset;
+        border-radius: 4px;
+        border: 1px solid #eee;
+        background-color: #fafafa;
+        height: 40px;
+        width: 200px;
+        margin: 0 8px 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+        line-height: 24px;
+    }
+    
+    .card-container .card:not(:last-child) {
+        margin-right: 0;
+    }
+    
+    .card.card-small {
+        height: 16px;
+        width: 168px;
+    }
+    
+    .card-container .card:not(.highlight-card) {
+        cursor: pointer;
+    }
+    
+    .card-container .card:not(.highlight-card):hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    }
+    
+    .card-container .card:not(.highlight-card):hover .material-icons path {
+        fill: rgb(105, 103, 103);
+    }
+    
+    .card.highlight-card {
+        background-color: #1976d2;
+        color: white;
+        font-weight: 600;
+        border: none;
+        width: auto;
+        min-width: 30%;
+        position: relative;
+    }
+    
+    .card.card.highlight-card span {
+        margin-left: 60px;
+    }
+    
+    svg#rocket {
+        width: 80px;
+        position: absolute;
+        left: -10px;
+        top: -24px;
+    }
+    
+    a,
+    a:visited,
+    a:hover {
+        color: #1976d2;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #125699;
+    }
+    
+    .terminal {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 6px;
+        padding-top: 45px;
+        margin-top: 8px;
+        overflow: hidden;
+        background-color: rgb(15, 15, 16);
+    }
+    
+    .terminal::before {
+        content: "\2022 \2022 \2022";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: rgb(58, 58, 58);
+        color: #c2c3c4;
+        width: 100%;
+        font-size: 2rem;
+        line-height: 0;
+        padding: 14px 0;
+        text-indent: 4px;
+    }
+    
+    .terminal pre {
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+        color: white;
+        padding: 0 1rem 1rem;
+        margin: 0;
+    }
+    
+    .circle-link {
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        margin: 8px;
+        background-color: white;
+        border: 1px solid #eeeeee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: 1s ease-out;
+    }
+    
+    .circle-link:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .github-star-badge .material-icons {
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+    }
+    
+    table {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 12px;
+        margin: 45px;
+        width: 480px;
+        text-align: left;
+        border-collapse: collapse;
+    }
+    
+    th {
+        font-size: 13px;
+        font-weight: normal;
+        padding: 8px;
+        background: #b9c9fe;
+        border-top: 4px solid #aabcfe;
+        border-bottom: 1px solid #fff;
+        color: #039;
+    }
+    
+    td {
+        padding: 8px;
+        background: #e8edff;
+        border-bottom: 1px solid #fff;
+        color: #669;
+        border-top: 1px solid transparent;
+    }
+    
+    tr:hover td {
+        background: #d0dafd;
+        color: #339;
+    }
+    
+    .btn {
+        color: #0099CC;
+        background: transparent;
+        border: 2px solid #0099CC;
+        border-radius: 6px;
+    }
+    
+    .ventana {
+        color: #0099CC;
+        background: transparent;
+        border: 2px solid #aabcfe;
+        border-radius: 6px;
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    
+    .btn:hover {
+        background-color: #008CBA;
+        /* Green */
+        color: white;
+    }
+    /* Responsive Styles */
+    
+    @media screen and (max-width: 767px) {
+        .card-container>*:not(.circle-link),
+        .terminal {
+            width: 100%;
+        }
+        .card:not(.highlight-card) {
+            height: 16px;
+            margin: 8px 0;
+        }
+        .card.highlight-card span {
+            margin-left: 72px;
+        }
+    }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <img width="40" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    />
+    <span>CONSULTA DE USUARIOS POR TIPOS.</span>
+    <div class="spacer"></div>
+
+</div>
+
+<div class="content" role="main">
+
+    <!-- Next Steps -->
+    <input type="hidden" #selection>
+
+    <div class="ventana">
+        <div class="card-container">
+
+            <div style="padding-right: 50px;">
+                <h3>Tipo de Usuario:</h3>
+            </div>
+
+            <div class="caja">
+                <select [(ngModel)]="SelectTipo" id="idTipo" class="form-control">
+            <option value="EXTERNO">EXTERNO</option>
+            <option value="INTERNO">INTERNO</option>
+        </select>
+            </div>
+
+        </div>
+
+
+        <div class="card-container">
+
+            <button class="btn card card-small" (click)="getUser()" tabindex="0">
+          <span>Consultar</span>
+        </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card-container">
+
+        <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="divTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th *ngIf="divExterno">Correo</th>
+                    <th *ngIf="divExterno">Contacto</th>
+                    <th *ngIf="divExterno">Entidad</th>
+                    <th *ngIf="divInterno">Perfil</th>
+                    <th *ngIf="divInterno">Puesto</th>
+                    <th *ngIf="divInterno">CodigoEmpleado</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let forecast of listado">
+                    <td>{{ forecast.idUser }}</td>
+                    <td>{{ forecast.nombre }}</td>
+                    <td>{{ forecast.tipo }}</td>
+                    <td *ngIf="divExterno">{{ forecast.correo }}</td>
+                    <td *ngIf="divExterno">{{ forecast.contacto }}</td>
+                    <td *ngIf="divExterno">{{ forecast.entidad }}</td>
+                    <td *ngIf="divInterno">{{ forecast.puesto }}</td>
+                    <td *ngIf="divInterno">{{ forecast.perfil }}</td>
+                    <td *ngIf="divInterno">{{ forecast.codEmpleado }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div class="card-container" *ngIf="divMsg">
+        <h1>No hay datos.</h1>
+
+    </div>
+
+
+    <!-- Links -->
+    <div class="card-container">
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    </footer>
+
+</div>
+<router-outlet></router-outlet>
